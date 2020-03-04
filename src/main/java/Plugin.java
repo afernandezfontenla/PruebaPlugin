@@ -8,13 +8,13 @@ import java.io.IOException;
 public class Plugin {
     public static void main(String[] args) throws IOException {
 
-        String token = JOptionPane.showInputDialog("Introduce el token:");
-        //String usuario = JOptionPane.showInputDialog("Escribe tu usuario de Github: ");
-        //String password = JOptionPane.showInputDialog("Escribe tu contraseña de Github: ");
+        //Pido el nombre del repositorio a crear
         String nombre = JOptionPane.showInputDialog("Escribe nombre del repositorio: ");
+        //Pido la descripción del repositorio
         String descrip = JOptionPane.showInputDialog("Escribe una descripción del respositorio: ");
 
-        GitHub github = new GitHubBuilder().withJwtToken(token).build();
-        GHRepository repo = github.createRepository(nombre, descrip, "https://github.com/afernandezfontenla", false/*public*/);
+        GitHub github = GitHubBuilder.fromPropertyFile("/home/local/DANIELCASTELAO/afernandezfontenla/IdeaProjects/EjPlugin/.github").build();
+        GHRepository repo = github.createRepository(nombre,descrip,"https://www.google.com/",false);
     }
+
 }
