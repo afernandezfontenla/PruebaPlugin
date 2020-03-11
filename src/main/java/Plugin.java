@@ -1,20 +1,22 @@
+import org.kohsuke.github.GHCreateRepositoryBuilder;
 import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GitHub;
-import org.kohsuke.github.GitHubBuilder;
-import javax.swing.*;
 import java.io.IOException;
+import java.util.Scanner;
 
-
-public class Plugin {
+public class Plugin{
     public static void main(String[] args) throws IOException {
+        Scanner sc = new Scanner(System.in);
+        String usuario,contraseña;
+        System.out.println("Introduce un usuario");
 
-        //Pido el nombre del repositorio a crear
-        String nombre = JOptionPane.showInputDialog("Escribe nombre del repositorio: ");
-        //Pido la descripción del repositorio
-        String descrip = JOptionPane.showInputDialog("Escribe una descripción del respositorio: ");
+        usuario = sc.nextLine();
+        System.out.println("Introduce una contraseña");
+        contraseña = sc.nextLine();
 
-        GitHub github = GitHubBuilder.fromPropertyFile("/home/local/DANIELCASTELAO/afernandezfontenla/IdeaProjects/EjPlugin/.github").build();
-        GHRepository repo = github.createRepository(nombre,descrip,"https://www.google.com/",false);
+        GitHub gh = GitHub.connectUsingPassword(usuario, contraseña);
+        GHCreateRepositoryBuilder CrearRepo = gh.createRepository("PruebaGitHubApi").description("Prueba API").private_(true);
+        GHRepository new_repo = CrearRepo.create();
     }
-
 }
+
